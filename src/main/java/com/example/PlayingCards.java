@@ -37,7 +37,6 @@ public class PlayingCards {
         JACK(11), //絵札の11
         QUEEN(12), //絵札の12
         KING(13); //絵札の13
-
         private int rankNumber;
 
         private CardRank(int rankNumber) {

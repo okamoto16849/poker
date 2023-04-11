@@ -43,5 +43,7 @@ public class Main {
         //TODO:確認後に削除
         System.out.println(deck);
 
+        PokerRule pokerRole2 = new PokerRule();
+
     }
 }
