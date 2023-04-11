@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PokerRule {
 
-    public enum PokerRole {
+    public enum PokerHand {
         ROYAL_STRAIGHT_FLUSH(1), //ロイヤルストレートフラッシュ
         STRAIGHT_FLUSH(2), //ストレートフラッシュ
         FOUR_OF_A_KIND(3), //フォーカード
@@ -19,7 +19,7 @@ public class PokerRule {
 
         private int pokerRole;
 
-        PokerRole(int pokerRole) {
+        private PokerHand(int pokerRole) {
             this.pokerRole = pokerRole;
         }
 
@@ -29,12 +29,12 @@ public class PokerRule {
 
     }
 
-    public PokerRole getPokerRole(List<PlayingCards.PictorialPattern> playingCardsList) {
+    public PokerHand getPokerRole(List<PlayingCards.PictorialPattern> playingCardsList) {
         if (isFourOfAKind(playingCardsList)) {
-            return PokerRole.FOUR_OF_A_KIND;
+            return PokerHand.FOUR_OF_A_KIND;
         }
 
-        return PokerRole.HIGH_CARD;
+        return PokerHand.HIGH_CARD;
     }
 
     public Boolean isFourOfAKind(List<PlayingCards.PictorialPattern> playingCardsList) {
