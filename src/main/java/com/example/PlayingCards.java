@@ -3,9 +3,13 @@ package com.example;
 public class PlayingCards {
 
     public enum PictorialPattern {
+        //クラブ
         CLUBS("♠️"),
+        //ダイヤ
         DIAMONDS("♦︎"),
+        //ハート
         HEARTS("❤︎"),
+        //スペード
         SPADES("♠️");
 
         private String pictorialPatternMark;
@@ -20,19 +24,20 @@ public class PlayingCards {
     }
 
     public enum CardRank {
-        TWO(2),
-        THREE(3),
-        FOUR(4),
-        FIVE(5),
-        SIX(6),
-        SEVEN(7),
-        EIGHT(8),
-        NINE(9),
-        TEN(10),
-        JACK(11),
-        QUEEN(12),
-        KING(13),
-        ACE(1);
+        ACE(1), //数札の1
+        TWO(2), //数札の2
+        THREE(3), //数札の3
+        FOUR(4), //数札の4
+        FIVE(5), //数札の5
+        SIX(6), //数札の6
+        SEVEN(7), //数札の7
+        EIGHT(8), //数札の8
+        NINE(9), //数札の9
+        TEN(10), //数札の10
+        JACK(11), //絵札の11
+        QUEEN(12), //絵札の12
+        KING(13); //絵札の13
+
         private int rankNumber;
 
         private CardRank(int rankNumber) {

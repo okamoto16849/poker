@@ -38,7 +38,7 @@ public class Main {
         System.out.println(deck);
         //TODO:確認後に削除
         System.out.println(computerCardList);
-        //山札からプレイヤーが引いた手札を削除
+        //山札からコンピュターが引いた手札を削除
         deck.removeAll(computerCardList);
         //TODO:確認後に削除
         System.out.println(deck);
