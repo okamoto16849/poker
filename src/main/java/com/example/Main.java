@@ -25,7 +25,7 @@ public class Main {
         System.out.println("プレイヤーの手札");
         Player player = new Player();
 
-        List<PlayingCards> playingCardsList = player.setPlayerHand(deck);
+        List<PlayingCards> playingCardsList = player.addPlayerHand(deck);
         //TODO:確認後に削除
         System.out.println(playingCardsList);
         //山札からプレイヤーが引いた手札を削除
@@ -34,7 +34,7 @@ public class Main {
         System.out.println(deck);
 
         Computer computer = new Computer();
-        List<PlayingCards> computerCardList = computer.setComputerHand(deck);
+        List<PlayingCards> computerCardList = computer.addComputerHand(deck);
         System.out.println(deck);
         //TODO:確認後に削除
         System.out.println(computerCardList);
