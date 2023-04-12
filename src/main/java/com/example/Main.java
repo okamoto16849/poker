@@ -45,6 +45,9 @@ public class Main {
 
         PokerRule pokerRule = new PokerRule();
         pokerRule.isFourOfAKind(playingCardsList);
+        pokerRule.isThreeOfAKind(playingCardsList);
+        pokerRule.isTwoPair(playingCardsList);
+        pokerRule.isOnePair(playingCardsList);
 
     }
 }
