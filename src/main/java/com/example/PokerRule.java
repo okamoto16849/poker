@@ -74,7 +74,7 @@ public class PokerRule {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
-        //countMapの値を全て取得して、値(数字の出現回数)が2であればtrueを返す
+        //countMapの値を全て取得して、値(数字の出現回数)が2かつ1であればtrueを返す
         for (int countValue : cardRankCountMap.values()) {
             if (countValue == 2 && countValue == 1) {
                 return true;
