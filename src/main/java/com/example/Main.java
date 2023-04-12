@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         //PlayingCardsクラスから絵札と数や記号のついたカードを山札に加える
         List<PlayingCards> deck = new ArrayList<>();
-        for (PlayingCards.PictorialPattern pattern : PlayingCards.PictorialPattern.values() ) {
+        for (PlayingCards.PictorialPattern pattern : PlayingCards.PictorialPattern.values()) {
             for (PlayingCards.CardRank cardRank : PlayingCards.CardRank.values()) {
                 deck.add(new PlayingCards(pattern.getPictorialPatternMark(), cardRank.getRankNumber()));
             }
@@ -43,7 +43,8 @@ public class Main {
         //TODO:確認後に削除
         System.out.println(deck);
 
-        PokerRule pokerRole2 = new PokerRule();
+        PokerRule pokerRule = new PokerRule();
+        pokerRule.isFourOfAKind(playingCardsList);
 
     }
 }
