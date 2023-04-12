@@ -1,7 +1,8 @@
 package com.example;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PokerRule {
 
@@ -29,7 +30,8 @@ public class PokerRule {
 
     }
 
-    public PokerHand getPokerRole(List<PlayingCards.PictorialPattern> playingCardsList) {
+    //ポーカーの役を判定する
+    public PokerHand judgePokerHand(List<PlayingCards> playingCardsList) {
         if (isFourOfAKind(playingCardsList)) {
             return PokerHand.FOUR_OF_A_KIND;
         }
@@ -37,21 +39,31 @@ public class PokerRule {
         return PokerHand.HIGH_CARD;
     }
 
-    public Boolean isFourOfAKind(List<PlayingCards.PictorialPattern> playingCardsList) {
+    //フォーカードかどうか判定する
+    public Boolean isFourOfAKind(List<PlayingCards> playingCardsList) {
+        //キーには数字、値には数字の出現回数を格納
+        Map<Integer, Integer> countMap = new HashMap<>();
 
-        List<PlayingCards.PictorialPattern> playingCards = new ArrayList<>();
+        for (PlayingCards cardRank : playingCardsList) {
+            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+            int cardNumber = playingCards.getCardRank();
 
-        for (PlayingCards.PictorialPattern pattern : playingCardsList) {
-
-            playingCards.remove(pattern.getPictorialPatternMark());
-
+            //countMapに同じ数字が含まれていたら、その数字の出現回数を1回増やす
+            if (countMap.containsKey(cardNumber)) {
+                countMap.put(cardNumber, countMap.get(cardNumber) + 1);
+            //同じ数字がなければ、出現回数を1回にする
+            } else {
+                countMap.put(cardNumber, 1);
+            }
         }
 
-        if (playingCardsList.get(1).equals(playingCardsList.get(2))) {
-            return true;
+        //countMapの値を全て取得して、値(数字の出現回数)が4であればtrueを返す
+        for (int countValue : countMap.values()) {
+            if (countValue == 4) {
+                return true;
+            }
         }
 
         return false;
     }
-
 }
