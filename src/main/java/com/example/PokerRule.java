@@ -40,7 +40,7 @@ public class PokerRule {
     }
 
     //フォーカードかどうか判定する
-    public Boolean isFourOfAKind(List<PlayingCards> playingCardsList) {
+    public boolean isFourOfAKind(List<PlayingCards> playingCardsList) {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
@@ -55,7 +55,7 @@ public class PokerRule {
     }
 
     //スリーカードかどうか判定する
-    public Boolean isThreeOfAKind(List<PlayingCards> playingCardsList) {
+    public boolean isThreeOfAKind(List<PlayingCards> playingCardsList) {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
@@ -70,7 +70,7 @@ public class PokerRule {
     }
 
     //ツーペアかどうか判定する
-    public Boolean isTwoPair(List<PlayingCards> playingCardsList) {
+    public boolean isTwoPair(List<PlayingCards> playingCardsList) {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
@@ -85,7 +85,7 @@ public class PokerRule {
     }
 
     //ワンペアかどうか判定する
-    public Boolean isOnePair(List<PlayingCards> playingCardsList) {
+    public boolean isOnePair(List<PlayingCards> playingCardsList) {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
