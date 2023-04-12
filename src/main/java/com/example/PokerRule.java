@@ -41,29 +41,83 @@ public class PokerRule {
 
     //フォーカードかどうか判定する
     public Boolean isFourOfAKind(List<PlayingCards> playingCardsList) {
-        //キーには数字、値には数字の出現回数を格納
-        Map<Integer, Integer> countMap = new HashMap<>();
-
-        for (PlayingCards cardRank : playingCardsList) {
-            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
-            int cardNumber = playingCards.getCardRank();
-
-            //countMapに同じ数字が含まれていたら、その数字の出現回数を1回増やす
-            if (countMap.containsKey(cardNumber)) {
-                countMap.put(cardNumber, countMap.get(cardNumber) + 1);
-            //同じ数字がなければ、出現回数を1回にする
-            } else {
-                countMap.put(cardNumber, 1);
-            }
-        }
+        //キーには数札、値には数字の出現回数を格納
+        Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
         //countMapの値を全て取得して、値(数字の出現回数)が4であればtrueを返す
-        for (int countValue : countMap.values()) {
+        for (int countValue : cardRankCountMap.values()) {
             if (countValue == 4) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    //スリーカードかどうか判定する
+    public Boolean isThreeOfAKind(List<PlayingCards> playingCardsList) {
+        //キーには数札、値には数字の出現回数を格納
+        Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
+
+        //countMapの値を全て取得して、値(数字の出現回数)が3であればtrueを返す
+        for (int countValue : cardRankCountMap.values()) {
+            if (countValue == 3) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //ツーペアかどうか判定する
+    public Boolean isTwoPair(List<PlayingCards> playingCardsList) {
+        //キーには数札、値には数字の出現回数を格納
+        Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
+
+        //countMapの値を全て取得して、値(数字の出現回数)が2であればtrueを返す
+        for (int countValue : cardRankCountMap.values()) {
+            if (countValue == 2 && countValue == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //ワンペアかどうか判定する
+    public Boolean isOnePair(List<PlayingCards> playingCardsList) {
+        //キーには数札、値には数字の出現回数を格納
+        Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
+
+        //countMapの値を全て取得して、値(数字の出現回数)が2であればtrueを返す
+        for (int countValue : cardRankCountMap.values()) {
+            if (countValue == 2) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //トランプの数札の枚数を数える
+    public Map<Integer, Integer> getCardRankCountMap(List<PlayingCards> playingCardsList) {
+
+        //キーには数札、値には数字の出現回数を格納
+        Map<Integer, Integer> cardRankCountMap = new HashMap<>();
+
+        for (PlayingCards cardRank : playingCardsList) {
+            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+            int cardNumber = playingCards.getCardRank();
+
+            //countMapに同じ数札が含まれていたら、その数札の出現回数を1回増やす
+            if (cardRankCountMap.containsKey(cardNumber)) {
+                cardRankCountMap.put(cardNumber, cardRankCountMap.get(cardNumber) + 1);
+                //同じ数札がなければ、出現回数を1回にする
+            } else {
+                cardRankCountMap.put(cardNumber, 1);
+            }
+        }
+
+        return cardRankCountMap;
     }
 }
