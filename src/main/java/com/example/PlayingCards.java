@@ -49,13 +49,30 @@ public class PlayingCards {
 
     }
 
-    private final String pictorialPattern;
+    private String pictorialPattern;
 
-    private final int cardRank;
+    private int cardRank;
+
+    private PictorialPattern pattern;
+
+    private CardRank rank;
 
     public PlayingCards(String pictorialPattern, int cardRank) {
         this.pictorialPattern = pictorialPattern;
         this.cardRank = cardRank;
+    }
+
+    public PlayingCards(PictorialPattern pattern, CardRank rank) {
+        this.pattern = pattern;
+        this.rank = rank;
+    }
+
+    public String getPictorialPattern() {
+        return pictorialPattern;
+    }
+
+    public int getCardRank() {
+        return cardRank;
     }
 
     @Override
