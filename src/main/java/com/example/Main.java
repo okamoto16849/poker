@@ -44,10 +44,10 @@ public class Main {
         System.out.println(deck);
 
         PokerRule pokerRule = new PokerRule();
-        pokerRule.isFourOfAKind(playingCardsList);
-        pokerRule.isThreeOfAKind(playingCardsList);
-        pokerRule.isTwoPair(playingCardsList);
-        pokerRule.isOnePair(playingCardsList);
-
+        PokerRule.PokerHand playerHand =
+                pokerRule.judgePokerHand(pokerRule.isFourOfAKind(playingCardsList),
+                pokerRule.isFullHouse(playingCardsList), pokerRule.isThreeOfAKind(playingCardsList),
+                pokerRule.isTwoPair(playingCardsList), pokerRule.isOnePair(playingCardsList));
+        System.out.println(playerHand);
     }
 }
