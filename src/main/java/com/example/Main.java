@@ -45,9 +45,10 @@ public class Main {
 
         PokerRule pokerRule = new PokerRule();
         PokerRule.PokerHand playerHand =
-                pokerRule.judgePokerHand(pokerRule.isFourOfAKind(playingCardsList),
-                pokerRule.isFullHouse(playingCardsList), pokerRule.isThreeOfAKind(playingCardsList),
-                pokerRule.isTwoPair(playingCardsList), pokerRule.isOnePair(playingCardsList));
+                pokerRule.judgePokerHand(pokerRule.isFourOfAKind(playingCardsList), pokerRule.isFullHouse(playingCardsList),
+                        pokerRule.isFLUSH(playingCardsList), pokerRule.isStraight(playingCardsList),
+                        pokerRule.isThreeOfAKind(playingCardsList), pokerRule.isTwoPair(playingCardsList),
+                        pokerRule.isOnePair(playingCardsList));
         System.out.println(playerHand);
     }
 }
