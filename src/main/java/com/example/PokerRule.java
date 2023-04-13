@@ -31,9 +31,27 @@ public class PokerRule {
     }
 
     //ポーカーの役を判定する
-    public PokerHand judgePokerHand(List<PlayingCards> playingCardsList) {
-        if (isFourOfAKind(playingCardsList)) {
+    public PokerHand judgePokerHand(boolean isFourOfAKind, boolean isFullHouse,
+                                    boolean isThreeOfAKind, boolean isTwoPair,
+                                    boolean isOnePair) {
+        if (isFourOfAKind) {
             return PokerHand.FOUR_OF_A_KIND;
+        }
+
+        if (isFullHouse) {
+            return PokerHand.FULL_HOUSE;
+        }
+
+        if (isThreeOfAKind) {
+            return PokerHand.THREE_OF_A_KIND;
+        }
+
+        if (isTwoPair) {
+            return PokerHand.TWO_PAIR;
+        }
+
+        if (isOnePair) {
+            return PokerHand.ONE_PAIR;
         }
 
         return PokerHand.HIGH_CARD;
@@ -47,6 +65,26 @@ public class PokerRule {
         //countMapの値を全て取得して、値(数字の出現回数)が4であればtrueを返す
         for (int countValue : cardRankCountMap.values()) {
             if (countValue == 4) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //フルハウスかどうか判定する
+    public boolean isFullHouse(List<PlayingCards> playingCardsList) {
+        //キーには数札、値には数字の出現回数を格納
+        Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
+
+        //3の数字の出現回数
+        int threePairNumber = 0;
+        //countMapの値を全て取得して、値(数字の出現回数)が3であればthreePairNumberを1増やす
+        for (int countValue : cardRankCountMap.values()) {
+            if (countValue == 3) {
+                threePairNumber = threePairNumber + 1;
+            //値(数字の出現回数)が2かつ3の数字の出現回数が1であればtrueを返す
+            } else if (countValue == 2 && threePairNumber == 1) {
                 return true;
             }
         }
@@ -74,10 +112,17 @@ public class PokerRule {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
-        //countMapの値を全て取得して、値(数字の出現回数)が2かつ1であればtrueを返す
+        //2の数字の出現回数
+        int twoPairNumber = 0;
+        //countMapの値を全て取得して、値(数字の出現回数)が2であればtwoPairNumberに1を足す
         for (int countValue : cardRankCountMap.values()) {
-            if (countValue == 2 && countValue == 1) {
-                return true;
+            if (countValue == 2) {
+                twoPairNumber = twoPairNumber + 1;
+                //2の数字の出現回数が2つあればtrueを返す
+                if (twoPairNumber == 2) {
+                    return true;
+
+                }
             }
         }
 
