@@ -1,8 +1,10 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 public class PokerRule {
 
@@ -31,15 +33,23 @@ public class PokerRule {
     }
 
     //ポーカーの役を判定する
-    public PokerHand judgePokerHand(boolean isFourOfAKind, boolean isFullHouse,
-                                    boolean isThreeOfAKind, boolean isTwoPair,
-                                    boolean isOnePair) {
+    public PokerHand judgePokerHand(boolean isFourOfAKind, boolean isFullHouse, boolean isFLUSH,
+                                    boolean isStraight, boolean isThreeOfAKind,
+                                    boolean isTwoPair, boolean isOnePair) {
         if (isFourOfAKind) {
             return PokerHand.FOUR_OF_A_KIND;
         }
 
         if (isFullHouse) {
             return PokerHand.FULL_HOUSE;
+        }
+
+        if (isFLUSH) {
+            return PokerHand.FLUSH;
+        }
+
+        if (isStraight) {
+            return PokerHand.STRAIGHT;
         }
 
         if (isThreeOfAKind) {
@@ -90,6 +100,45 @@ public class PokerRule {
         }
 
         return false;
+    }
+
+    //フラッシュかどうか判定する
+    public boolean isFLUSH(List<PlayingCards> playingCardsList) {
+
+        //キーには絵札、値には絵札の出現回数を格納
+        Map<String, Integer> countPictorialPatternMap = getPictorialPatternCountMap(playingCardsList);
+
+        for (int countValue : countPictorialPatternMap.values()) {
+            if (countValue == 5) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //ストレートかどうか判定する
+    public boolean isStraight(List<PlayingCards> playingCardsList) {
+
+        List<Integer> cardRankList = new ArrayList<>();
+
+        for (PlayingCards cardRank : playingCardsList) {
+            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+            int cardNumber = playingCards.getCardRank();
+            cardRankList.add(cardNumber);
+        }
+
+        Collections.sort(cardRankList);
+
+        boolean isConsecutive = true;
+        for (int i = 0; i < cardRankList.size(); i++) {
+            if (cardRankList.get(i) != cardRankList.get(i) + 1) {
+                isConsecutive = false;
+                break;
+            }
+        }
+
+        return isConsecutive;
     }
 
     //スリーカードかどうか判定する
@@ -164,5 +213,28 @@ public class PokerRule {
         }
 
         return cardRankCountMap;
+    }
+
+    //トランプの絵札の枚数を数える
+    public Map<String, Integer> getPictorialPatternCountMap(List<PlayingCards> playingCardsList) {
+
+        //キーには絵札、値には絵札の出現回数を格納
+        Map<String, Integer> cardPictorialPatternMap = new HashMap<>();
+
+        for (PlayingCards cardRank : playingCardsList) {
+            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+            String pictorialPattern = playingCards.getPictorialPattern();
+
+            //countMapに同じ絵札が含まれていたら、その絵札の出現回数を1回増やす
+            if (cardPictorialPatternMap.containsKey(pictorialPattern)) {
+                cardPictorialPatternMap.put(pictorialPattern,
+                        cardPictorialPatternMap.get(pictorialPattern) + 1);
+                //同じ絵札がなければ、出現回数を1回にする
+            } else {
+                cardPictorialPatternMap.put(pictorialPattern, 1);
+            }
+        }
+
+        return cardPictorialPatternMap;
     }
 }
