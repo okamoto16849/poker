@@ -14,7 +14,7 @@ public class PokerRuleTest {
     @Test
     @DisplayName("フルハウスになるカードをフルハウスと判定できる")
     void full_house_true() {
-        assertFalse(pokerRule.isFullHouse(List.of(
+        assertTrue(pokerRule.isFullHouse(List.of(
                 new PlayingCards("❤︎", 3),
                 new PlayingCards("♦︎", 3),
                 new PlayingCards("♦︎", 3),
@@ -50,7 +50,7 @@ public class PokerRuleTest {
     @Test
     @DisplayName("ストレートになるカードをストレートではないと判定できる")
     void straight_false() {
-        assertFalse(pokerRule.isFullHouse(List.of(
+        assertFalse(pokerRule.isStraight(List.of(
                 new PlayingCards("❤︎", 3),
                 new PlayingCards("♦︎", 4),
                 new PlayingCards("♦︎", 5),
