@@ -127,8 +127,7 @@ public class PokerRule {
 
         List<Integer> cardRankList = new ArrayList<>();
 
-        for (PlayingCards cardRank : playingCardsList) {
-            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+        for (PlayingCards playingCards : playingCardsList) {
             int cardNumber = playingCards.getCardRank();
             cardRankList.add(cardNumber);
         }
@@ -202,8 +201,7 @@ public class PokerRule {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = new HashMap<>();
 
-        for (PlayingCards cardRank : playingCardsList) {
-            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+        for (PlayingCards playingCards : playingCardsList) {
             int cardNumber = playingCards.getCardRank();
 
             //countMapに同じ数札が含まれていたら、その数札の出現回数を1回増やす
@@ -224,8 +222,7 @@ public class PokerRule {
         //キーには絵札、値には絵札の出現回数を格納
         Map<String, Integer> cardPictorialPatternMap = new HashMap<>();
 
-        for (PlayingCards cardRank : playingCardsList) {
-            PlayingCards playingCards = new PlayingCards(cardRank.getPictorialPattern(), cardRank.getCardRank());
+        for (PlayingCards playingCards : playingCardsList) {
             String pictorialPattern = playingCards.getPictorialPattern();
 
             //countMapに同じ絵札が含まれていたら、その絵札の出現回数を1回増やす
