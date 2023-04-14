@@ -87,18 +87,23 @@ public class PokerRule {
         //キーには数札、値には数字の出現回数を格納
         Map<Integer, Integer> cardRankCountMap = getCardRankCountMap(playingCardsList);
 
+        //Map.Entryのリストを作成
+        List<Map.Entry<Integer, Integer>> listEntries = new ArrayList<>(cardRankCountMap.entrySet());
+
+        //Mapの値を比較して降順にソートする
+        listEntries.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+
         //3の数字の出現回数
         int threePairNumber = 0;
         //countMapの値を全て取得して、値(数字の出現回数)が3であればthreePairNumberを1増やす
-        for (int countValue : cardRankCountMap.values()) {
-            if (countValue == 3) {
-                threePairNumber = threePairNumber + 1;
-            //値(数字の出現回数)が2かつ3の数字の出現回数が1であればtrueを返す
-            } else if (countValue == 2 && threePairNumber == 1) {
+        for (Map.Entry<Integer, Integer> listEntry : listEntries) {
+            if (listEntry.getValue() == 3) {
+                threePairNumber++;
+                //値(数字の出現回数)が2かつ3の数字の出現回数が1であればtrueを返す
+            } else if (listEntry.getValue() == 2 && threePairNumber == 1) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -130,15 +135,13 @@ public class PokerRule {
 
         Collections.sort(cardRankList);
 
-        boolean isConsecutive = true;
-        for (int i = 0; i < cardRankList.size(); i++) {
-            if (cardRankList.get(i) != cardRankList.get(i) + 1) {
-                isConsecutive = false;
-                break;
+        for (int i = 0; i < cardRankList.size() - 1; i++) {
+            if (cardRankList.get(i).equals(cardRankList.get(i + 1))) {
+                return true;
             }
         }
 
-        return isConsecutive;
+        return false;
     }
 
     //スリーカードかどうか判定する
@@ -166,7 +169,7 @@ public class PokerRule {
         //countMapの値を全て取得して、値(数字の出現回数)が2であればtwoPairNumberに1を足す
         for (int countValue : cardRankCountMap.values()) {
             if (countValue == 2) {
-                twoPairNumber = twoPairNumber + 1;
+                twoPairNumber++;
                 //2の数字の出現回数が2つあればtrueを返す
                 if (twoPairNumber == 2) {
                     return true;
