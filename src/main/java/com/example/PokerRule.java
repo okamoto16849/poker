@@ -133,12 +133,12 @@ public class PokerRule {
         Collections.sort(cardRankList);
 
         for (int i = 0; i < cardRankList.size() - 1; i++) {
-            if (cardRankList.get(i).equals(cardRankList.get(i + 1))) {
-                return true;
+            if (cardRankList.get(i) != cardRankList.get(i + 1) - 1) {
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     //スリーカードかどうか判定する
