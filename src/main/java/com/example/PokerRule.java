@@ -33,34 +33,32 @@ public class PokerRule {
     }
 
     //ポーカーの役を判定する
-    public PokerHand judgePokerHand(boolean isFourOfAKind, boolean isFullHouse, boolean isFLUSH,
-                                    boolean isStraight, boolean isThreeOfAKind,
-                                    boolean isTwoPair, boolean isOnePair) {
-        if (isFourOfAKind) {
+    public PokerHand judgePokerHand(List<PlayingCards> playingCardsList) {
+        if (isFourOfAKind(playingCardsList)) {
             return PokerHand.FOUR_OF_A_KIND;
         }
 
-        if (isFullHouse) {
+        if (isFullHouse(playingCardsList)) {
             return PokerHand.FULL_HOUSE;
         }
 
-        if (isFLUSH) {
+        if (isFLUSH(playingCardsList)) {
             return PokerHand.FLUSH;
         }
 
-        if (isStraight) {
+        if (isStraight(playingCardsList)) {
             return PokerHand.STRAIGHT;
         }
 
-        if (isThreeOfAKind) {
+        if (isThreeOfAKind(playingCardsList)) {
             return PokerHand.THREE_OF_A_KIND;
         }
 
-        if (isTwoPair) {
+        if (isTwoPair(playingCardsList)) {
             return PokerHand.TWO_PAIR;
         }
 
-        if (isOnePair) {
+        if (isOnePair(playingCardsList)) {
             return PokerHand.ONE_PAIR;
         }
 
