@@ -9,27 +9,26 @@ import java.util.Collections;
 public class PokerRule {
 
     public enum PokerHand {
-        ROYAL_STRAIGHT_FLUSH(1), //ロイヤルストレートフラッシュ
-        STRAIGHT_FLUSH(2), //ストレートフラッシュ
-        FOUR_OF_A_KIND(3), //フォーカード
-        FULL_HOUSE(4), //フルハウス
-        FLUSH(5), //フラッシュ
-        STRAIGHT(6), //ストレート
-        THREE_OF_A_KIND(7), //スリーカード
-        TWO_PAIR(8), //ツーペア
-        ONE_PAIR(9), //ワンペア
-        HIGH_CARD(10); //ハイカード(役なし)
+        ROYAL_STRAIGHT_FLUSH(10), //ロイヤルストレートフラッシュ
+        STRAIGHT_FLUSH(9), //ストレートフラッシュ
+        FOUR_OF_A_KIND(8), //フォーカード
+        FULL_HOUSE(7), //フルハウス
+        FLUSH(6), //フラッシュ
+        STRAIGHT(5), //ストレート
+        THREE_OF_A_KIND(4), //スリーカード
+        TWO_PAIR(3), //ツーペア
+        ONE_PAIR(2), //ワンペア
+        HIGH_CARD(1); //ハイカード(役なし)
 
-        private int pokerRole;
+        private int pokerRoleGrade;
 
-        private PokerHand(int pokerRole) {
-            this.pokerRole = pokerRole;
+        PokerHand(int pokerRoleGrade) {
+            this.pokerRoleGrade = pokerRoleGrade;
         }
 
-        public int getPokerRole() {
-            return pokerRole;
+        public int getPokerRoleGrade() {
+            return pokerRoleGrade;
         }
-
     }
 
     /**
@@ -38,14 +37,13 @@ public class PokerRule {
      * @param computerHand コンピュターの役
      */
     public void showMatchResult(PokerHand playerHand, PokerHand computerHand) {
-        if (playerHand.getPokerRole() > computerHand.getPokerRole()) {
+        if (playerHand.getPokerRoleGrade() > computerHand.getPokerRoleGrade()) {
             System.out.println("プレイヤーの勝ちです");
-        } else if (playerHand.getPokerRole() < computerHand.getPokerRole()) {
-            System.out.println("プレイヤーの負けです");
-        } else {
+        } else if (playerHand.getPokerRoleGrade() == computerHand.getPokerRoleGrade()) {
             System.out.println("引き分けです");
+        } else {
+            System.out.println("プレイヤーの負けです");
         }
-
     }
 
     //ポーカーの役を判定する
