@@ -34,6 +34,11 @@ public class PokerRule {
 
     //ポーカーの役を判定する
     public PokerHand judgePokerHand(List<PlayingCards> playingCardsList) {
+
+        if (isStraightFlush(playingCardsList)) {
+            return PokerHand.STRAIGHT_FLUSH;
+        }
+
         if (isFourOfAKind(playingCardsList)) {
             return PokerHand.FOUR_OF_A_KIND;
         }
@@ -63,6 +68,12 @@ public class PokerRule {
         }
 
         return PokerHand.HIGH_CARD;
+    }
+
+    //ストレートフラッシュかどうか判定する
+    public boolean isStraightFlush(List<PlayingCards> playingCardsList) {
+
+        return isStraight(playingCardsList) && isFLUSH(playingCardsList);
     }
 
     //フォーカードかどうか判定する
