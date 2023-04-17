@@ -12,6 +12,30 @@ public class PokerRuleTest {
     PokerRule pokerRule = new PokerRule();
 
     @Test
+    @DisplayName("ロイヤルストレートフラッシュになるカードをロイヤルストレートフラッシュになると判定できる")
+    void royal_straight_flush_true() {
+        assertTrue(pokerRule.isRoyalStraightFlush(List.of(
+                new PlayingCards("♦︎", 1),
+                new PlayingCards("♦︎", 10),
+                new PlayingCards("♦︎", 11),
+                new PlayingCards("♦︎", 12),
+                new PlayingCards("♦︎", 13)
+        )));
+    }
+
+    @Test
+    @DisplayName("ロイヤルストレートフラッシュになるカードをロイヤルストレートフラッシュではないと判定できる")
+    void royal_straight_flush_false() {
+        assertFalse(pokerRule.isRoyalStraightFlush(List.of(
+                new PlayingCards("♦︎", 2),
+                new PlayingCards("♦︎", 10),
+                new PlayingCards("♦︎", 11),
+                new PlayingCards("♦︎", 12),
+                new PlayingCards("♦︎", 13)
+        )));
+    }
+
+    @Test
     @DisplayName("ストレートフラッシュになるカードをストレートフラッシュになると判定できる")
     void straight_flush_true() {
         assertTrue(pokerRule.isStraightFlush(List.of(
@@ -24,7 +48,7 @@ public class PokerRuleTest {
     }
 
     @Test
-    @DisplayName("ストレートフラッシュになるカードをストレートフラッシュになると判定できる")
+    @DisplayName("ストレートフラッシュになるカードをストレートフラッシュにならないと判定できる")
     void straight_flush_false() {
         assertFalse(pokerRule.isStraightFlush(List.of(
                 new PlayingCards("♦︎", 6),
@@ -35,8 +59,6 @@ public class PokerRuleTest {
         )));
     }
 
-
-
     @Test
     @DisplayName("フルハウスになるカードをフルハウスと判定できる")
     void full_house_true() {
@@ -46,7 +68,7 @@ public class PokerRuleTest {
                 new PlayingCards("♦︎", 3),
                 new PlayingCards("♦︎", 6),
                 new PlayingCards("♦︎", 6)
-                )));
+        )));
     }
 
     @Test
@@ -65,11 +87,11 @@ public class PokerRuleTest {
     @DisplayName("ストレートになるカードをストレートと判定できる")
     void straight_true() {
         assertTrue(pokerRule.isStraight(List.of(
-                        new PlayingCards("❤︎", 3),
-                        new PlayingCards("♦︎", 4),
-                        new PlayingCards("♦︎", 5),
-                        new PlayingCards("♦︎", 6),
-                        new PlayingCards("♦︎", 7)
+                new PlayingCards("❤︎", 3),
+                new PlayingCards("♦︎", 4),
+                new PlayingCards("♦︎", 5),
+                new PlayingCards("♦︎", 6),
+                new PlayingCards("♦︎", 7)
         )));
     }
 
