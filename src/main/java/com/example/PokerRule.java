@@ -35,6 +35,10 @@ public class PokerRule {
     //ポーカーの役を判定する
     public PokerHand judgePokerHand(List<PlayingCards> playingCardsList) {
 
+        if (isRoyalStraightFlush(playingCardsList)) {
+            return PokerHand.ROYAL_STRAIGHT_FLUSH;
+        }
+
         if (isStraightFlush(playingCardsList)) {
             return PokerHand.STRAIGHT_FLUSH;
         }
@@ -68,6 +72,32 @@ public class PokerRule {
         }
 
         return PokerHand.HIGH_CARD;
+    }
+
+    public boolean isRoyalStraightFlush(List<PlayingCards> playingCardsList) {
+
+        List<Integer> cardRankList = new ArrayList<>();
+
+        for (PlayingCards playingCards : playingCardsList) {
+            int cardNumber = playingCards.getCardRank();
+            cardRankList.add(cardNumber);
+        }
+
+        Collections.sort(cardRankList);
+
+        for (int i = 0; i < 1; i++) {
+            if (cardRankList.get(i) == PlayingCards.CardRank.ACE.getRankNumber() &&
+                    cardRankList.get(i + 1) == PlayingCards.CardRank.TEN.getRankNumber() &&
+                    cardRankList.get(i + 2) == PlayingCards.CardRank.JACK.getRankNumber() &&
+                    cardRankList.get(i + 3) == PlayingCards.CardRank.QUEEN.getRankNumber() &&
+                    cardRankList.get(i + 4) == PlayingCards.CardRank.KING.getRankNumber()) {
+                if (isFLUSH(playingCardsList)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     //ストレートフラッシュかどうか判定する
