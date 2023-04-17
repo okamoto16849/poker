@@ -4,7 +4,7 @@ public class PlayingCards {
 
     public enum PictorialPattern {
         //クラブ
-        CLUBS("♠️"),
+        CLUBS("♣️"),
         //ダイヤ
         DIAMONDS("♦︎"),
         //ハート
