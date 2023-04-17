@@ -15,8 +15,8 @@ public class PokerRuleTest {
 
 
     @Test
-    @DisplayName("ポーカーの役を判定する")
-    void judgePokerHand() {
+    @DisplayName("ポーカーの役がロイヤルストレートフラッシュであればロイヤルストレートフラッシュの定数を戻す")
+    void judgePokerHand_royalStraightFlush() {
         PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
                 new PlayingCards("♦︎", 1),
                 new PlayingCards("♦︎", 10),
@@ -26,6 +26,34 @@ public class PokerRuleTest {
         ));
 
         assertEquals(PokerRule.PokerHand.ROYAL_STRAIGHT_FLUSH, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がストレートフラッシュであればストレートフラッシュの定数を戻す")
+    void judgePokerHand_straightFlush() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("♦︎", 6),
+                new PlayingCards("♦︎", 7),
+                new PlayingCards("♦︎", 8),
+                new PlayingCards("♦︎", 9),
+                new PlayingCards("♦︎", 10)
+        ));
+
+        assertEquals(PokerRule.PokerHand.STRAIGHT_FLUSH, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がフォーカードであればフォーカードの定数を戻す")
+    void judgePokerHand_fourOfAKind() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 3),
+                new PlayingCards("♦︎", 3),
+                new PlayingCards("♠︎", 3),
+                new PlayingCards("♠︎", 3),
+                new PlayingCards("♦︎", 1)
+        ));
+
+        assertEquals(PokerRule.PokerHand.FOUR_OF_A_KIND, pokerHandActual);
     }
 
     @Test
