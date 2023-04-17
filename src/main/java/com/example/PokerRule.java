@@ -32,6 +32,22 @@ public class PokerRule {
 
     }
 
+    /**
+     * 対戦結果を表示する
+     * @param playerHand プレイヤーの役
+     * @param computerHand コンピュターの役
+     */
+    public void showMatchResult(PokerHand playerHand, PokerHand computerHand) {
+        if (playerHand.getPokerRole() > computerHand.getPokerRole()) {
+            System.out.println("プレイヤーの勝ちです");
+        } else if (playerHand.getPokerRole() < computerHand.getPokerRole()) {
+            System.out.println("プレイヤーの負けです");
+        } else {
+            System.out.println("引き分けです");
+        }
+
+    }
+
     //ポーカーの役を判定する
     public PokerHand judgePokerHand(List<PlayingCards> playingCardsList) {
 
