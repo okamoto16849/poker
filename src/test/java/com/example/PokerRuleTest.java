@@ -12,6 +12,32 @@ public class PokerRuleTest {
     PokerRule pokerRule = new PokerRule();
 
     @Test
+    @DisplayName("ストレートフラッシュになるカードをストレートフラッシュになると判定できる")
+    void straight_flush_true() {
+        assertTrue(pokerRule.isStraightFlush(List.of(
+                new PlayingCards("♦︎", 6),
+                new PlayingCards("♦︎", 7),
+                new PlayingCards("♦︎", 8),
+                new PlayingCards("♦︎", 9),
+                new PlayingCards("♦︎", 10)
+        )));
+    }
+
+    @Test
+    @DisplayName("ストレートフラッシュになるカードをストレートフラッシュになると判定できる")
+    void straight_flush_false() {
+        assertFalse(pokerRule.isStraightFlush(List.of(
+                new PlayingCards("♦︎", 6),
+                new PlayingCards("♦︎", 7),
+                new PlayingCards("♦︎", 8),
+                new PlayingCards("♦︎", 9),
+                new PlayingCards("♦︎", 11)
+        )));
+    }
+
+
+
+    @Test
     @DisplayName("フルハウスになるカードをフルハウスと判定できる")
     void full_house_true() {
         assertTrue(pokerRule.isFullHouse(List.of(
