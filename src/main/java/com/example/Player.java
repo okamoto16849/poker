@@ -11,7 +11,11 @@ public class Player {
     public List<PlayingCards> addPlayerHand(List<PlayingCards> cardList) {
         for (int i = 0; i < 5; i++) {
             playerCardList.add(cardList.get(i));
+            if (playerCardList.size() == 5) {
+                break;
+            }
         }
         return playerCardList;
     }
+
 }

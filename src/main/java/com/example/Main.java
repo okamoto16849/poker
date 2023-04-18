@@ -3,6 +3,7 @@ package com.example;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,6 +28,34 @@ public class Main {
 
         //山札からプレイヤーが引いた手札を削除
         deck.removeAll(playingCardsList);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("手札：" + playingCardsList);
+
+        System.out.println("捨てるカードを選んでください（0〜4の番号で選択してください）");
+        System.out.println("捨てるカードがなければ9を選んでください");
+        if (scanner.nextInt() != 9) {
+            for (int i = 0; i < playingCardsList.size(); i++) {
+                System.out.println((i) + ":" + playingCardsList.get(i));
+            }
+
+            System.out.println("捨てるカードの位置を半角スペースで区切って入力してください。");
+            String input = scanner.nextLine();
+            String[] positions = input.split(" ");
+
+            // 捨てるカードの位置をリストから削除する
+            int count = 0;
+            for (String position : positions) {
+                int index = Integer.parseInt(position) - count;
+                if (index >= 0 && index < playingCardsList.size()) {
+                    playingCardsList.remove(index);
+                    count++;
+                }
+            }
+            playingCardsList = player.addPlayerHand(deck);
+        }
+
+        System.out.println(playingCardsList);
 
         Computer computer = new Computer();
         List<PlayingCards> computerCardList = computer.addComputerHand(deck);
