@@ -57,6 +57,105 @@ public class PokerRuleTest {
     }
 
     @Test
+    @DisplayName("ポーカーの役がフルハウスであればフルハウスの定数を戻す")
+    void judgePokerHand_fullHouse() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 3),
+                new PlayingCards("♦︎", 3),
+                new PlayingCards("♠︎", 3),
+                new PlayingCards("♠︎", 2),
+                new PlayingCards("♦︎", 2)
+        ));
+
+        assertEquals(PokerRule.PokerHand.FULL_HOUSE, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がフラッシュであればフラッシュの定数を戻す")
+    void judgePokerHand_flush() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 3),
+                new PlayingCards("❤︎", 5),
+                new PlayingCards("❤︎", 7),
+                new PlayingCards("❤︎", 9),
+                new PlayingCards("❤︎", 10)
+        ));
+
+        assertEquals(PokerRule.PokerHand.FLUSH, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がストレートであればストレートの定数を戻す")
+    void judgePokerHand_straight() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 3),
+                new PlayingCards("❤︎", 4),
+                new PlayingCards("♠", 5),
+                new PlayingCards("♦", 6),
+                new PlayingCards("❤︎", 7)
+        ));
+
+        assertEquals(PokerRule.PokerHand.STRAIGHT, pokerHandActual);
+    }
+
+
+    @Test
+    @DisplayName("ポーカーの役がスリーカードであればスリーカードの定数を戻す")
+    void judgePokerHand_threeOfAKind() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 4),
+                new PlayingCards("❤︎", 5),
+                new PlayingCards("♠", 5),
+                new PlayingCards("♦", 5),
+                new PlayingCards("❤︎", 7)
+        ));
+
+        assertEquals(PokerRule.PokerHand.THREE_OF_A_KIND, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がツーカードであればツーカードの定数を戻す")
+    void judgePokerHand_twoPair() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 1),
+                new PlayingCards("♣︎", 1),
+                new PlayingCards("♠", 5),
+                new PlayingCards("♦", 5),
+                new PlayingCards("❤︎", 7)
+        ));
+
+        assertEquals(PokerRule.PokerHand.TWO_PAIR, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がワンペアであればワンペアの定数を戻す")
+    void judgePokerHand_onePair() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 1),
+                new PlayingCards("♣︎", 2),
+                new PlayingCards("♠", 5),
+                new PlayingCards("♦", 5),
+                new PlayingCards("❤︎", 7)
+        ));
+
+        assertEquals(PokerRule.PokerHand.ONE_PAIR, pokerHandActual);
+    }
+
+    @Test
+    @DisplayName("ポーカーの役がハイカードであればハイカードの定数を戻す")
+    void judgePokerHand_highCard() {
+        PokerRule.PokerHand pokerHandActual = pokerRule.judgePokerHand(List.of(
+                new PlayingCards("❤︎", 1),
+                new PlayingCards("♣︎", 2),
+                new PlayingCards("♠", 5),
+                new PlayingCards("♦", 6),
+                new PlayingCards("❤︎", 7)
+        ));
+
+        assertEquals(PokerRule.PokerHand.HIGH_CARD, pokerHandActual);
+    }
+
+    @Test
     @DisplayName("ロイヤルストレートフラッシュになるカードをロイヤルストレートフラッシュになると判定できる")
     void royal_straight_flush_true() {
         assertTrue(pokerRule.isRoyalStraightFlush(List.of(
