@@ -2,7 +2,6 @@ package com.example;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,40 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PokerRuleTest {
 
     PokerRule pokerRule = new PokerRule();
+    Player player = new Player();
+
+    @Test
+    @DisplayName("プレイヤーが山札から5枚のカードを引く")
+    void addPlayerHand() {
+
+        List<PlayingCards> playerCardsListExpect = List.of(
+        new PlayingCards("❤︎", 7),
+        new PlayingCards("♠︎", 4),
+        new PlayingCards("♠︎", 5),
+        new PlayingCards("♦︎", 2),
+        new PlayingCards("♦︎", 8));
+
+        List<PlayingCards> playerCardsListActual =
+                player.addPlayerHand(playerCardsListExpect);
+
+        assertEquals(playerCardsListExpect, playerCardsListActual);
+    }
+
+    @Test
+    @DisplayName("コンピュターが山札から5枚のカードを引く")
+    void addComputerHand() {
+
+        List<PlayingCards> computerCardsListExpect = List.of(
+                new PlayingCards("❤︎", 7),
+                new PlayingCards("♠︎", 4),
+                new PlayingCards("♠︎", 5),
+                new PlayingCards("♦︎", 6),
+                new PlayingCards("♦︎", 9));
+
+        List<PlayingCards> computerCardsActual = player.addPlayerHand(computerCardsListExpect);
+
+        assertEquals(computerCardsListExpect, computerCardsActual);
+    }
 
 
     @Test
